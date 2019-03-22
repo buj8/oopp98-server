@@ -1,3 +1,5 @@
+
+# Maven ignores
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -8,5 +10,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+# ignore Intellij .idea folder
+.idea/
+*.iml
+
+
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+
