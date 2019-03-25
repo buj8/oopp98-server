@@ -16,7 +16,12 @@ public class ServerDeployer {
     }
 
     @RequestMapping("/")
-    String index() {
+    String indexText() {
+        return "Welcome to the group 98 server";
+    }
+
+    @RequestMapping("/login")
+    String loginText() {
         return "Welcome to the group 98 server";
     }
 }
