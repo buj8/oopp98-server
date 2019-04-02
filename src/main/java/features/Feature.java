@@ -1,11 +1,6 @@
 package features;
 
-
 import javafx.scene.control.Alert;
-import utility.HttpRequestHandler;
-
-import java.io.BufferedReader;
-
 
 /**
  * Performs a http post request to server to
@@ -14,10 +9,6 @@ import java.io.BufferedReader;
 
 public class Feature {
     /**
-     * Server Domain.
-     */
-    private final String domain = "https://go-green-db.herokuapp.com";
-    /**
      * value to be calculated.
      */
     private int value;
@@ -25,15 +16,22 @@ public class Feature {
      * Id to identify type of activity ex: 1 = Vegetarian meal.
      */
     private int id;
+
     /**
      * Constructor for Feature.
      *
      * @param userValue Text field value
+     * @param choice the activity id
      */
     public Feature(final int userValue, final int choice) {
         this.value = userValue;
         this.id = choice;
     }
+
+    /**
+     * Getter for the activity id.
+     * @return activity id
+     */
     public int getId() {
         return id;
     }
@@ -66,39 +64,39 @@ public class Feature {
      * @return returns points
      * @author ohussein
      */
-//    public int calculatePoints() {
-//
-////        checkForm();
-//        try {
-//            BufferedReader httpBody;
-//            httpBody = new HttpRequestHandler(domain).reqPost(
-//                    "/points", this);
-//
-//
-//            String con = new HttpRequestHandler(domain).resLog(
-//                    httpBody, null);
-//            System.out.println(con);
-//            return Integer.parseInt(con);
-//
-//        } catch (Exception e) {
-//
-//            exceptionHandler(e);
-//
-//        }
-//        return 0;
-//    }
+    //    public int calculatePoints() {
+    //
+    //       checkForm();
+    //        try {
+    //            BufferedReader httpBody;
+    //            httpBody = new HttpRequestHandler(domain).reqPost(
+    //                    "/points", this);
+    //
+    //
+    //            String con = new HttpRequestHandler(domain).resLog(
+    //                    httpBody, null);
+    //            System.out.println(con);
+    //            return Integer.parseInt(con);
+    //
+    //        } catch (Exception e) {
+    //
+    //            exceptionHandler(e);
+    //
+    //    }
+    //    return 0;
+    //}
 
 
     /**
      * Helper method that handles exceptions.
      *
-     * @param e exception that was thrown
+     * @param exception exception that was thrown
      */
-    protected void exceptionHandler(final Exception e) {
+    protected void exceptionHandler(final Exception exception) {
         Alert statusCodeError = new Alert(Alert.AlertType.ERROR);
-        statusCodeError.setTitle(e.getMessage());
-//        statusCodeError.setContentText("See terminal for stacktrace.");
-        statusCodeError.setContentText(e.toString());
+        statusCodeError.setTitle(exception.getMessage());
+        //statusCodeError.setContentText("See terminal for stacktrace.");
+        statusCodeError.setContentText(exception.toString());
         statusCodeError.showAndWait();
     }
 
