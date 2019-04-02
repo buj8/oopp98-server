@@ -16,7 +16,7 @@ public class Feature {
     /**
      * Server Domain.
      */
-    private final String domain = "http://localhost:8080";
+    private final String domain = "https://go-green-db.herokuapp.com";
     /**
      * value to be calculated.
      */
