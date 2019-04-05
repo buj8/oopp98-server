@@ -1,8 +1,5 @@
 package server;
 
-
-import java.net.URI;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-//native imports
 import utility.DbAdaptor;
 import utility.LoginCredentials;
 import utility.RegisterCredentials;
-import utility.UpdateRequest;
+
+import java.net.URI;
 
 /**
  * Class that maps route requests made to the server.
@@ -35,7 +32,23 @@ public class RoutingController {
     /**
      * DB_ADAPTOR connections/ disconnection/ authentication.
      */
-    private static final DbAdaptor DB_ADAPTOR = new DbAdaptor();
+    private static DbAdaptor DB_ADAPTOR = new DbAdaptor();
+
+    /**
+     * Getter.
+     * @return the db adaptor
+     */
+    public static DbAdaptor getDBADAPTOR() {
+        return DB_ADAPTOR;
+    }
+
+    /**
+     * Setter.
+     * @param dba the new db adaptor.
+     */
+    public static void setDBADAPTOR(DbAdaptor dba) {
+        DB_ADAPTOR = dba;
+    }
 
     /**
      * Default mapping for index.
@@ -90,5 +103,19 @@ public class RoutingController {
                 HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
-}
 
+    /**
+     * Changes the password for the specified username.
+     * @param creds The username and new password.
+     * @return response entity
+     */
+    @PostMapping("/changepass")
+    public ResponseEntity changepass(@RequestBody final String[] creds) {
+        String user = creds[1];
+        String newpass = creds[2];
+
+        DB_ADAPTOR.changepass(user, newpass);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+}

@@ -2,9 +2,16 @@ package utility;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**
@@ -260,12 +267,12 @@ public class DbAdaptor {
 
             st.setString(1, logCre.getUsername());
             rs = st.executeQuery();
-            LoginCredentials tempLC = new LoginCredentials(null, null);
+            LoginCredentials tempLc = new LoginCredentials(null, null);
             while (rs.next()) {
-                tempLC.setUsername(rs.getString(one));
-                tempLC.setPassword(rs.getString(two));
+                tempLc.setUsername(rs.getString(one));
+                tempLc.setPassword(rs.getString(two));
             }
-            if (logCre.equals(tempLC)) {
+            if (logCre.equals(tempLc)) {
                 return true;
             }
             st.close();
@@ -367,13 +374,13 @@ public class DbAdaptor {
      * updates activity.
      *
      * @param name   whose activity should be updated
-     * @param activityID which activity should be updated
+     * @param activityId which activity should be updated
      * @param amount     by how many should it be updated
      * @return true if worked false if exceptions
 
     */
     public boolean updateActivity(final String name,
-                                  final int activityID,
+                                  final int activityId,
                                   int amount) {
         try {
             connect();
@@ -385,7 +392,7 @@ public class DbAdaptor {
                     .toString());
             st.setString(one, name);
 
-            st.setInt(two, activityID);
+            st.setInt(two, activityId);
             rs = st.executeQuery();
             System.out.println(rs.next());
             amount += rs.getInt("amount");
@@ -398,10 +405,10 @@ public class DbAdaptor {
                             + "WHERE player = ? AND activity_id = ?");
             pst.setInt(one, amount);
             pst.setString(two, name);
-            pst.setInt(three, activityID);
+            pst.setInt(three, activityId);
             pst.executeUpdate();
             pst.close();
-            calculateScore(name, activityID, amount);
+            calculateScore(name, activityId, amount);
             updateTotalScore(name);
             return true;
         } catch (SQLException e) {
@@ -416,10 +423,10 @@ public class DbAdaptor {
     /**
      * Calculates score of a given user.
      * @param username the username of the user.
-     * @param activityID the activity of the user.
+     * @param activityId the activity of the user.
      * @param amount the count of activities.
      */
-    public void calculateScore(final String username, final int activityID,
+    public void calculateScore(final String username, final int activityId,
                                 final int amount) {
         try {
             connect();
@@ -429,7 +436,7 @@ public class DbAdaptor {
                     .append("?").toString());
             st.setInt(one, amount);
             st.setString(two, username);
-            st.setInt(three, activityID);
+            st.setInt(three, activityId);
             st.executeUpdate();
             st.close();
         } catch (SQLException e) {
@@ -444,10 +451,10 @@ public class DbAdaptor {
      * returns activity amount.
      *
      * @param name username whose activity amount should be returned.
-     * @param activityID id of the activity
+     * @param activityId id of the activity
      * @return amount of given activity of given user
      */
-    public int getActivityAmount(final String name, final int activityID) {
+    public int getActivityAmount(final String name, final int activityId) {
         try {
             connect();
             StringBuilder query = new StringBuilder(
@@ -456,7 +463,7 @@ public class DbAdaptor {
                     .append("?");
             PreparedStatement st = conn.prepareStatement(query.toString());
             st.setString(one, name);
-            st.setInt(two, activityID);
+            st.setInt(two, activityId);
             rs = st.executeQuery();
             System.out.println(rs.next());
             int ret = rs.getInt(one);
@@ -481,6 +488,7 @@ public class DbAdaptor {
         connect();
 
         try {
+
             String query = "SELECT total_score FROM users WHERE username = ?";
             PreparedStatement st = conn.prepareStatement(query.toString());
             st.setString(one, name);
@@ -525,7 +533,7 @@ public class DbAdaptor {
      * @param fromUser from which the invitation is send
      * @param toUser user to whom you want to send the invitation
      */
-    public void sendFriendReq(final String fromUser, final String toUser) {
+    public boolean sendFriendReq(final String fromUser, final String toUser) {
 
         if (checkIfInDb(fromUser,toUser)) {
             connect();
@@ -537,17 +545,20 @@ public class DbAdaptor {
                              + "to_user,friend_status) VALUES (?,?, ?::friend_status)");
                 st.setString(1,fromUser);
                 st.setString(2,toUser);
-                st.setString(3, FriendStatus.PENDING.name());
+                st.setString(3,FriendStatus.PENDING.name());
                 st.executeUpdate();
                 st.close();
                 //alertBuilder.showInformationNotification("Friend request sent!");
+                return true;
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
             } finally {
                 disconnect();
             }
         }
+        return false;
     }
 
     /**
@@ -598,7 +609,7 @@ public class DbAdaptor {
      * @param toUser user who got the inv
      * @param accepted rejected - false, accepted - true
      */
-    public void considerRequest(final String fromUser,
+    public boolean considerRequest(final String fromUser,
                                 final String toUser, final boolean accepted) {
         connect();
         try {
@@ -614,15 +625,11 @@ public class DbAdaptor {
             st.setString(2, fromUser);
             st.setString(3, toUser);
             st.executeUpdate();
-            /*if (accepted) {
-                alertBuilder.showInformationNotification("Friend request accepted!");
-            } else {
-                alertBuilder.showInformationNotification("Friend request declined!"
-                        + "\nUser is now blocked.");
-            }*/
             st.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         } finally {
             disconnect();
         }
