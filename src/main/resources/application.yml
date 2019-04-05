@@ -1,2 +1,15 @@
-server:
-  port: ${PORT}
+
+# This file sets the runtime properties of the server
+#
+# The only modification we are using is the port the app is being run,
+# the variable $PORT is part of the Heroku variables and it is set to the web dyno Heroku assigns to the process.
+#
+# To run this server locally uncomment the following:
+#
+#  server:
+#    port: ${8080}
+#
+# To run this server on Heroku uncomment the following:
+
+  server:
+    port: ${PORT}
