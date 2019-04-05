@@ -118,4 +118,15 @@ public class RoutingController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    /**
+     * In case the server is opened on a browser
+     * it returns a HTML page with some info
+     * about the server
+     */
+    @GetMapping("/error")
+    public String browserPage() {
+        return "errorHtml";
+    }
+
 }
