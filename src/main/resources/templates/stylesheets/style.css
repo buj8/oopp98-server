@@ -1,0 +1,75 @@
+
+@font-face { font-family: WWFRegular; src: url('wwf-webfont.ttf'); }
+
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #2ECC40;
+}
+
+#cmdHeader {
+    font-family: WWFRegular, sans-serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 15%;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: normal;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#cmdTitle {
+    padding-top: 20px;
+    padding-bottom: 0px;
+    background: darkgreen;
+}
+
+#cmdSubTitle {
+    background: darkgreen;
+    font-size: 35px;
+    padding-bottom: 20px;
+}
+
+#cmdLogo {
+    height: 150%;
+
+}
+
+#cmdDescription {
+    line-height: 30px;
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    color: white;
+    width: 50%;
+    font-family: Arial;
+    text-align: center;
+}
+
+#descriptionText {
+    top: 40%;
+}
+
+button {
+    border: none;
+    background: none;
+    color: white;
+    margin-top: 10px;
+    font-family: Arial;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+button:hover {
+    color: darkgreen;
+    cursor: pointer;
+    transition: 300ms;
+    font-size: 25px;
+}
