@@ -3,10 +3,7 @@ package server;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import utility.DbAdaptor;
 import utility.LoginCredentials;
 import utility.RegisterCredentials;
@@ -124,7 +121,7 @@ public class RoutingController {
      * it returns a HTML page with some info
      * about the server
      */
-    @GetMapping("/error")
+    @RequestMapping("/error")
     public String browserPage() {
         return "errorHtml";
     }
