@@ -97,7 +97,7 @@ button:focus {
     outline: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
 
     #cmdTitle {
         font-size: 200px;
