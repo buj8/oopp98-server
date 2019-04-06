@@ -11,6 +11,11 @@ body:hover{
     cursor: default;
 }
 
+hr {
+    border: 1px solid darkgreen;
+    border-radius: 30px;
+}
+
 #cmdHeader {
     font-family: WWFRegular, sans-serif;
     letter-spacing: 1px;
@@ -191,5 +196,12 @@ button:focus {
         line-height: 210%;
     }
 
+    #statusHeader {
+        padding: 5px;
+    }
+
+    button {
+        font-size: 150%;
+    }
 
 }
