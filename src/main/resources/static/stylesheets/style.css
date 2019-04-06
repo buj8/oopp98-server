@@ -97,7 +97,7 @@ button:focus {
     outline: none;
 }
 
-@media (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
 
     #cmdTitle {
         padding-top: 0%;

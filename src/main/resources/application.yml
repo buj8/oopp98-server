@@ -7,7 +7,7 @@
 # To run this server locally uncomment the following:
 #
 #  server:
-#    port: ${8080}
+#    port: 8080
 #
 # To run this server on Heroku uncomment the following:
 
