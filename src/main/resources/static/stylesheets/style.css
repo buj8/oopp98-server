@@ -36,9 +36,14 @@ body:hover{
 }
 
 #cmdTitle:hover {
-    font-size: 70px;
+    font-size: 55px;
+    color: floralwhite;
     transition: 500ms;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+#cmdTitle:hover #cmdDescription {
+    margin-top: 30%;
 }
 
 #cmdSubTitle {
@@ -49,6 +54,7 @@ body:hover{
 
 #cmdLogo {
     height: 150%;
+    transition: 500ms;
 }
 
 #cmdLogo:hover {
