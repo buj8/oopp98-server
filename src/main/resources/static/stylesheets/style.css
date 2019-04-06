@@ -119,6 +119,8 @@ button:focus {
 
     #cmdSubTitle{
         font-size: 100%;
+        padding-bottom: 5%;
+        margin-bottom: 10%;
     }
 
 
