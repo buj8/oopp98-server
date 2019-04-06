@@ -96,3 +96,22 @@ button:hover {
 button:focus {
     outline: none;
 }
+
+@media (max-width: 1000px) {
+
+    #cmdTitle {
+        font-size: 300px;
+    }
+
+
+    #cmdSubTitle{
+        font-size: 200px;
+    }
+
+
+    #cmdDescription {
+        width: 90%;
+        font-size: 40px;
+    }
+
+}
