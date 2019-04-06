@@ -100,18 +100,24 @@ button:focus {
 @media (max-width: 800px) {
 
     #cmdTitle {
-        font-size: 300px;
+        font-size: 200px;
+        line-height: 210px;
+    }
+
+    #cmdTitle:hover {
+        font-size: 205px;
     }
 
 
     #cmdSubTitle{
-        font-size: 200px;
+        font-size: 100px;
     }
 
 
     #cmdDescription {
         width: 90%;
         font-size: 40px;
+        line-height: 70px;
     }
 
 }
