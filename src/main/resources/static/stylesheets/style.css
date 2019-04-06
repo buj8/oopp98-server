@@ -123,11 +123,11 @@ button:focus {
 
 
     #cmdDescription {
-        padding-top: 5%;
+        padding-top: 0%;
         left: 5%;
         width: 90%;
-        font-size: 120%;
-        line-height: 140%;
+        font-size: 200%;
+        line-height: 210%;
     }
 
 }
