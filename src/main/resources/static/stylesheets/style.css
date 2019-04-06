@@ -91,11 +91,10 @@ button {
 }
 
 button:hover {
-    color: darkgreen;
     cursor: pointer;
     transition: 300ms;
     font-size: 25px;
-    background: lawngreen;
+    background: darkgreen;
     border-radius: 5px;
 }
 
@@ -103,6 +102,66 @@ button:focus {
     outline: none;
 }
 
+#statusHeader {
+    border: 2px solid deepskyblue;
+    padding-top: 10px;
+    background: white;
+    text-align: left;
+    padding-left: 20px;
+    color: black;
+    font-family: WWFRegular;
+    letter-spacing: 1px;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+#serverStatusText {
+    padding-left: 15px;
+    text-align: left;
+    line-height: 50px;
+    font-family: Inconsolata;
+    background: darkgrey;
+    border-radius: 2px;
+    border-color: darkgreen;
+    border-width: 3px;
+}
+
+/*This next code is for the animation of the 3 dots*/
+.one {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.0s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.0s;
+}
+
+.two {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.2s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.2s;
+}
+
+.three {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.3s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 @media only screen and (max-width: 1200px) {
 
     #cmdTitle {
@@ -131,5 +190,6 @@ button:focus {
         font-size: 200%;
         line-height: 210%;
     }
+
 
 }
