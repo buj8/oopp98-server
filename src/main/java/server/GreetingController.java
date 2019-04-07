@@ -18,7 +18,7 @@ import java.net.URI;
  * @author Omar
  */
 @RestController
-public class RoutingController {
+public class GreetingController {
     /**
      * The template for a response message.
      * {@value}
@@ -93,14 +93,14 @@ public class RoutingController {
      */
     @PostMapping("/register")
     public ResponseEntity registerResponse(
-            @RequestBody final RegisterCredentials regCre) {
+        @RequestBody final RegisterCredentials regCre) {
 
         if (DB_ADAPTOR.addNewUser(regCre)) {
             return new ResponseEntity("Registration successful. "
                     + "You can now log in", HttpStatus.OK);
         }
         return new ResponseEntity("Your account could not be created",
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
