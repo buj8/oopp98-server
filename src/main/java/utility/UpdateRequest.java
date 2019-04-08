@@ -11,7 +11,7 @@ public class UpdateRequest {
     /**
      * Activity and amount.
      */
-    private int activityId;
+    private int activityID;
     private int amount;
 
     /**
@@ -24,7 +24,7 @@ public class UpdateRequest {
                          final int activity,
                          final int count) {
         username = user;
-        activityId = activity;
+        activityID = activity;
         amount = count;
     }
 
@@ -41,7 +41,7 @@ public class UpdateRequest {
      * @return id of activity.
      */
     public int getActivityID() {
-        return activityId;
+        return activityID;
     }
 
     /**

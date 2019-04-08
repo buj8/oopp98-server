@@ -2,16 +2,9 @@ package utility;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 /**
@@ -545,7 +538,7 @@ public class DbAdaptor {
                              + "to_user,friend_status) VALUES (?,?, ?::friend_status)");
                 st.setString(1,fromUser);
                 st.setString(2,toUser);
-                st.setString(3,FriendStatus.PENDING.name());
+                st.setString(3, FriendStatus.PENDING.name());
                 st.executeUpdate();
                 st.close();
                 //alertBuilder.showInformationNotification("Friend request sent!");
@@ -650,7 +643,7 @@ public class DbAdaptor {
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,username);
-            statement.setString(2,FriendStatus.PENDING.name());
+            statement.setString(2, FriendStatus.PENDING.name());
             rs = statement.executeQuery();
             if (rs.next()) {
                 result = rs.getInt(1);
