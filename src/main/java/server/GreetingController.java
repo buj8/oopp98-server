@@ -38,7 +38,7 @@ public class GreetingController {
      * Getter.
      * @return the db adaptor
      */
-    public static DbAdaptor getDBADAPTOR() {
+    public static DbAdaptor getdbadaptor() {
         return DB_ADAPTOR;
     }
 
@@ -46,7 +46,7 @@ public class GreetingController {
      * Setter.
      * @param dba the new db adaptor.
      */
-    public static void setDBADAPTOR(DbAdaptor dba) {
+    public static void setdbadaptor(DbAdaptor dba) {
         DB_ADAPTOR = dba;
     }
 
@@ -100,7 +100,7 @@ public class GreetingController {
                     + "You can now log in", HttpStatus.OK);
         }
         return new ResponseEntity("Your account could not be created",
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.CONFLICT);
 
     }
 
@@ -111,8 +111,8 @@ public class GreetingController {
      */
     @PostMapping("/changepass")
     public ResponseEntity changepass(@RequestBody final String[] creds) {
-        String user = creds[0];
-        String newpass = creds[1];
+        String user = creds[1];
+        String newpass = creds[2];
 
         DB_ADAPTOR.changepass(user, newpass);
 
