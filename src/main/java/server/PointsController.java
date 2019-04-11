@@ -190,6 +190,7 @@ public class PointsController {
                     - jsonCon(HttpRequestHandler.resLog(httpBody, null));
 
         } else if (activityID == FIVE) {
+            System.out.println("solar panels");
             //solar panels
             if (dbAdaptor.getDate(request.getUsername()) != null) {
                 ZoneId zone = ZoneId.of("Europe/Amsterdam");
@@ -204,8 +205,13 @@ public class PointsController {
                         .plusMonths(Integer.parseInt("1"));
 
                 if (oneMonthLater.getMonthValue() > today.getMonthValue()) {
-                    System.out.println("you are here");
                     return new ResponseEntity("false", HttpStatus.OK);
+                } else if (!dbAdaptor.getAchievements(
+                        request.getUsername()).contains(8)
+                        && dbAdaptor.getPerformedTimes(
+                        request.getUsername(), FIVE) >= 2) {
+
+                    dbAdaptor.addAchievement(8, request.getUsername());
                 }
             } else {
                 if (!dbAdaptor.getAchievements(
@@ -213,23 +219,22 @@ public class PointsController {
 
                     dbAdaptor.addAchievement(7, request.getUsername());
                 }
-                if (!dbAdaptor.getAchievements(
-                        request.getUsername()).contains(8)
-                        && dbAdaptor.getPerformedTimes(
-                        request.getUsername(), FIVE) >= 2) {
-
-                        dbAdaptor.addAchievement(8, request.getUsername());
-                }
-                BufferedReader httpBody =
-                        httpHandler.reqGet("/electricity_uses.json?"
-                                + "energy=" + (double) amount / THREE_POINT_SIX
-                                + "&timeframe=2019-01-01%2F2019-02-01"
-                                + BP_KEY);
-
-                Date today = new Date(System.currentTimeMillis());
-                dbAdaptor.updateDate(request.getUsername(), today);
-                amount = jsonCon(HttpRequestHandler.resLog(httpBody, null));
             }
+            BufferedReader httpBody =
+                    httpHandler.reqGet("/electricity_uses.json?"
+                            + "energy=" + (double) amount / THREE_POINT_SIX
+                            + "&timeframe=2019-01-01%2F2019-02-01"
+                            + BP_KEY);
+            System.out.println(BP_API + "/electricity_uses.json?"
+                    + "energy=" + (double) amount / THREE_POINT_SIX
+                    + "&timeframe=2019-01-01%2F2019-02-01"
+                    + BP_KEY);
+            System.out.println("httpbodyapi: " + httpBody);
+
+            Date today = new Date(System.currentTimeMillis());
+            dbAdaptor.updateDate(request.getUsername(), today);
+            amount = jsonCon(HttpRequestHandler.resLog(httpBody, null));
+            System.out.println(amount);
         } else if (activityID == SIX) {
             //reducing home temperature according to data from
             // https://www.epa.gov/environmental-economics
@@ -267,14 +272,14 @@ public class PointsController {
     @PostMapping("/total")
     public ResponseEntity totalScore(@RequestBody final String username) {
 //        todo: add achievements
-                if(dbAdaptor.getTotalScore(username) >= 1000000
-                        && !dbAdaptor.getAchievements(username).contains(12)){
-                    dbAdaptor.addAchievement(12,username);
-                }
-                if(dbAdaptor.getFriends(username).size()>=10
-                        && !dbAdaptor.getAchievements(username).contains(11)){
-                    dbAdaptor.addAchievement(11,username);
-                }
+//                if(dbAdaptor.getTotalScore(username) >= 1000000
+//                        && !dbAdaptor.getAchievements(username).contains(12)){
+//                    dbAdaptor.addAchievement(12,username);
+//                }
+//                if(dbAdaptor.getFriends(username).size()>=10
+//                        && !dbAdaptor.getAchievements(username).contains(11)){
+//                    dbAdaptor.addAchievement(11,username);
+//                }
         return new ResponseEntity(dbAdaptor
                 .getTotalScore(username
                         .replace('"', ' ').trim()),

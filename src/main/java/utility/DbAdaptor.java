@@ -99,6 +99,24 @@ public class DbAdaptor {
     }
 
     /**
+     * Setter for conn.
+     * @param set the replacement for conn.
+     * @return true if updated succesfully.
+     */
+    public boolean setConn(Connection set) {
+        conn = set;
+        return true;
+    }
+
+    /**
+     * Getter for conn.
+     * @return conn.
+     */
+    public Connection getConn() {
+        return conn;
+    }
+
+    /**
      * Connect method.
      */
     public void connect() {
@@ -636,7 +654,6 @@ public class DbAdaptor {
      * @return count of pending friend requests
      */
     public int retrieveCount(String username) {
-        connect();
         int result = -1;
         String sql = "select count(from_user) from friend_request "
                 + "where to_user = ? and friend_status = ?::\"friend_status\"";
