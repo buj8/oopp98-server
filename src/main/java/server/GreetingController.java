@@ -111,8 +111,8 @@ public class GreetingController {
      */
     @PostMapping("/changepass")
     public ResponseEntity changepass(@RequestBody final String[] creds) {
-        String user = creds[1];
-        String newpass = creds[2];
+        String user = creds[0];
+        String newpass = creds[1];
 
         DB_ADAPTOR.changepass(user, newpass);
 
